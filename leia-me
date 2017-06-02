@@ -1,0 +1,28 @@
+--		Cenário
+
+
+
+-- lEGENDA ----------
+
+NB : numero de usuarios no codigo da matriz básica
+N : 
+LB : Comprimento do código da matriz básica
+W : Ponderação
+w :  variação da ponderação de w=1 até W
+N:  numero de usuarios
+
+
+lambdaA : Autocorrelação
+lambdaC : Correlação cruzada
+
+--     Parâmetros   ---
+Psr : Potência efetiva de cada usuario
+
+
+
+-- Explicações ---------
+
+Autocorrelação é a correlação cruzada de um sinal com o ele próprio.
+ É uma ferramenta matemática para encontrar padrões de repetição.
+ 
+ pw :  Representa os indices iniciais com valor '1'
