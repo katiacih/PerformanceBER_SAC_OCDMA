@@ -8,8 +8,8 @@ Created on 17 de mai de 2017
 #-*-coding:latin1-*-
 
 import numpy as np
-from math import sqrt,erfc,sin ,pi,log10
-import matplotlib.pyplot as plt
+from math import sqrt,erfc,sin ,pi,log10,log
+
 import scipy.special as sp
 import sympy as sym
 
@@ -95,8 +95,10 @@ def calc_rv(v, v0, delta_v, L, NB, dn, psr,array_code):
 
 
 def calculo_R(n_eta,e,h,v0):
-
+    # c : velocidade da luz no vacuo
+    #c =299792458
     R = (n_eta* e)/(h* v0)
+    #R = (n_eta * e) / (h * c)
     return R
 
 def calculo_Comprimento_codigo_N_FCC ( w , k):
@@ -191,7 +193,7 @@ def Ruido_Disparado(e,Psr,R,N,W,B):
     return Ish
 
 def Ruido_Termico(kb,Tn,B,RL):
-    
+    RL= float(RL)
     ith = ( ( 4 * kb * Tn * B) / (RL))
     return ith
 
@@ -275,17 +277,18 @@ def calculo_SNR_ART10(R,Psr,w,N,e,deltaV,k,kb,Tn,B,RL):
 def calculo_BER_ARtigo_MS(R, Psr, w, N, e, deltaV, kb, Tn, B, RL, L, LB, NB):
     R_2 =  (R ** 2)
     Psr_2 = ( Psr ** 2 )
-    a1_2 = (    (   w - NB + 1  ) ** 2  )
-    L_2 = (L ** 2)
+    a1_2 = float (    (   w - NB + 1  ) ** 2  )
+    L_2 = float(L ** 2)
 
     I_fotocorrente = (  R_2 * Psr_2  * a1_2) / L_2
 
     a2 = (w + (3 * NB) - 3)
+    a2 = float(a2)
 
     ruido_balistico = (e * B * R * Psr * a2 ) / L
 
 
-    ruido_PIIN = ((B * R_2 * Psr_2 * N * w) / (2 * L_2 * deltaV) ) * a2
+    ruido_PIIN = ((B * R_2 * Psr_2 * N * w) / (2.0 * L_2 * deltaV) ) * a2
 
     ruido_termico = Ruido_Termico(kb, Tn, B, RL)
 
@@ -294,27 +297,16 @@ def calculo_BER_ARtigo_MS(R, Psr, w, N, e, deltaV, kb, Tn, B, RL, L, LB, NB):
     snr = I_fotocorrente / sum_ruidos
 
     if (snr > 0):
-        raiz_snr = sqrt((snr / 8.0))
-        #snr_erfc = erfc(10)
+        snr_8 = snr/8.0
+        raiz_snr = sqrt(snr_8)
         snr_erfc = sp.erfc(raiz_snr)
         BER = (0.5 * snr_erfc )
         log_BER = log10(BER)
+        log_BER2 = log(BER)
         return log_BER
 
     else:
         return 0
-def snr_MS(R, Psr, w, N, e, deltaV, kb, Tn, B, RL, L, LB, NB,I):
-    R_2 = (R ** 2)
-    Psr_2 = (Psr ** 2)
-    a1_2 = ((w - NB + 1) ** 2)
-    L_2 = (L ** 2)
-    ruido_balistico = (e * B * R * Psr * a2) / L
-
-    ruido_PIIN = ((B * R_2 * Psr_2 * N * w) / 2 * L_2 * deltaV) * a2
-
-    ruido_termico = Ruido_Termico(kb, Tn, B, RL)
-
-    return I/(ruido_balistico+ruido_PIIN+ruido_termico)
 
     
     

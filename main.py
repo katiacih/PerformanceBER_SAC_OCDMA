@@ -12,7 +12,7 @@ from array import array
 
 from Codigos import codeMS, Ruidos
 from paramiko.ber import BER
-import auxiliar
+import function_tests
 import Codigos
 
 
@@ -32,11 +32,7 @@ def main():
     W = 4
     N=20
 
-    test_code_MS = auxiliar.teste_2()
-    ber = []
-    #ber = auxiliar.teste_code_MS()
-
-    print ber
+    function_tests.formulacao_testes_MS()
 
 
 

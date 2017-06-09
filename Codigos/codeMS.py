@@ -35,19 +35,19 @@ def calculoLB(W,NB):
     for i in range (1,int(W+1)):
         sum_i1 = sum_i1 + i
     sum_i2 =0
-    for i in range (1,int(W-NB)):
+    min_W_NB = int(W-NB)
+    for i in range (1,(min_W_NB+1)):
         sum_i2 = sum_i2 + i
     return sum_i1 - sum_i2
 
 def calculoL(N,NB,LB):
+    N = float(N)
+    NB = float(NB)
+    LB = float(LB)
     if N == 0 :
         return 1
-
-    return (N/NB)*LB
-
-
-
-
+    div = N/NB
+    return div*LB
 def equals_Sector(n,l,dictionary):
 
     for k, v in dictionary.iteritems():
@@ -164,7 +164,7 @@ def generated_sequence_code_Ms(NB,N,W):
     x = Code_class(matrix_CB,LB,NB,N)
     # array_final = x.technique_mapping()
 
-    array_code = x.capeta()
+    array_code = x.capeta_tecnica_de_mapeamento()
     #result = x.verify_same_sector(4,5,array_code)
 
     return array_code

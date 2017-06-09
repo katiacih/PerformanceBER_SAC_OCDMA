@@ -20,7 +20,7 @@ class Code_class:
     matrix_basic = []
     matrix_zeros = []
 
-
+    #inicializacoes
     def __init__(self, matrix_CB,LB,NB,N):
         self.matrix_basic = matrix_CB
         self.matrix_zeros = np.zeros((NB+1,LB), dtype=np.int)
@@ -29,8 +29,7 @@ class Code_class:
         self.N = N
 
 
-
-
+    #
     def join_array(self, array_CB,array_Z,NB,M):
         for i in range(len(array_CB)):
             for j in range(len(array_CB[i])):
@@ -38,6 +37,7 @@ class Code_class:
                 print(array_CB[i][j])
                 print 'e'
 
+    #aplicacao da tecnica de mapeamento
     def technique_mapping(self):
         M = self.N / self.NB
         # array = np.identity(M, dtype=np.int)
@@ -75,16 +75,13 @@ class Code_class:
         return arr
 
 
-    def capeta(self):
+    def capeta_tecnica_de_mapeamento(self):
         M = self.N / self.NB
         array_of_doom = []
         array_final = [[1, 0], [0, 1]]
 
         i = 0
         j = 0
-
-
-
         array_of_doom.append(list(self.matrix_basic[0]) + list(self.matrix_zeros[0]))
         arr = self.test_method(M)
         #for row in arr:
@@ -94,7 +91,6 @@ class Code_class:
 
         return arr
     def verify_same_sector(self,Ci,Cj,array_codes):
-        print 'array da zoeira'
         count_NB = 0
 
         while count_NB <= len(array_codes):
@@ -108,7 +104,4 @@ class Code_class:
 
 
 
-
-
-            # def cross_correlation(self):
 
